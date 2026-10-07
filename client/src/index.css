@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Dual-theme base defaults ─────────────────────────────────────────────── */
+/* Light mode: warm off-white canvas with dark text.                          */
+/* Dark mode:  OLED-black canvas with white text.                             */
+/* Both themes share the Sky Blue brand accent so the identity is consistent. */
+@layer base {
+  html {
+    @apply font-sans;
+  }
+
+  body {
+    @apply bg-light-canvas text-slate-800 dark:bg-surface-oled dark:text-white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Scrollbar — subtle in light mode, branded on hover in both */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-zinc-700 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-500;
+  }
+}
+
+/* ── Reusable component layer ─────────────────────────────────────────────── */
+/* These utility classes provide consistent card, badge, and status styles    */
+/* across both themes. Light mode uses subtle shadows for depth; dark mode    */
+/* uses thin semi-transparent borders — matching the OLED aesthetic.          */
+@layer components {
+  /* Card: shadow-based depth in light mode, border-based in dark */
+  .card {
+    @apply bg-white rounded-lg shadow-card dark:bg-surface-dark dark:shadow-none dark:border dark:border-white/[0.08];
+  }
+
+  /* Pill badge base */
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+
+  /* Status dot */
+  .status-dot {
+    @apply inline-block w-2 h-2 rounded-full;
+  }
+}
+
